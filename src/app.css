@@ -1,0 +1,35 @@
+/*
+* Author: Dante Villa
+*/
+
+body,
+html {
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  user-select: none;
+}
+
+.box-gradient {
+  background: linear-gradient(0deg, #b13cff 0%, #dd45d3 50%, #fd9d52 100%);
+}
+
+.box-gradient .card button {
+  display: block;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.btn-love {
+  border: 1px solid #dd45d3;
+  background-color: rgba(221, 69, 211, 0.1);
+  color: #dd45d3;
+  font-weight: 500;
+}
+
+.btn-love:hover {
+  border: 1px solid #dd45d3 !important;
+  background-color: #dd45d3 !important;
+  color: #fff;
+}
