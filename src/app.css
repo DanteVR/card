@@ -10,7 +10,8 @@ html {
 }
 
 .box-gradient {
-  background: linear-gradient(0deg, #b13cff 0%, #dd45d3 50%, #fd9d52 100%);
+  background: linear-gradient(0deg, #3c89ff 0%, #45d4dd 50%, #52fde6 100%);
+  //background: linear-gradient(0deg, #b13cff 0%, #dd45d3 50%, #fd9d52 100%);
 }
 
 .box-gradient .card button {
