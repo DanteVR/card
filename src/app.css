@@ -1,6 +1,4 @@
-/*
-* Author: Dante Villa
-*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
 
 body,
 html {
@@ -10,7 +8,7 @@ html {
 }
 
 .box-gradient {
-  background: linear-gradient(0deg, #3c89ff 0%, #45d4dd 50%, #52fde6 100%);
+  background-image: linear-gradient(to top, #fc5c7d, #f359a2, #db62c6, #b072e6, #6a82fb);
 }
 
 .box-gradient .card button {
@@ -32,4 +30,82 @@ html {
   border: 1px solid #dd45d3 !important;
   background-color: #dd45d3 !important;
   color: #fff;
+}
+
+audio {
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.content-audio {
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.bg_heart {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden
+}
+
+.heart {
+  position: absolute;
+  top: -50%;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -m-transform: rotate(-45deg);
+  transform: rotate(-45deg)
+}
+
+.heart:before {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 100%;
+}
+
+.heart:after {
+  position: absolute;
+  top: 0;
+  right: -50%;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 100%;
+}
+
+@-webkit-keyframes love {
+  0% {
+    top: 110%
+  }
+}
+
+@-moz-keyframes love {
+  0% {
+    top: 110%
+  }
+}
+
+@-ms-keyframes love {
+  0% {
+    top: 110%
+  }
+}
+
+@keyframes love {
+  0% {
+    top: 110%
+  }
 }
