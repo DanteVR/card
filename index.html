@@ -1,55 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Felíz cumpleaños 🥳</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <meta name="theme-color" content="#6a82fb" />
-  <link rel="stylesheet" href="./src/app.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lluvia de Globos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Pacifico', cursive;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
-
 <body>
+<canvas id="canvas"></canvas>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-  <body class="box-gradient">
-    <canvas id="canvas"></canvas>
-    <div class="d-flex justify-content-center align-items-center h-100 bg_heart">
-      <div class="card p-4 m-4 shadow-lg">
-        <div style="display:flex; flex-direction: column; justify-content: center; align-items: center">
-          <p class="text-center fw-light">Felíz cumpleaños 💜</p>
-        </div>
-      </div>
-    </div>
-    <!--div class="container">
-      <div class="col">
-      	<div class="heart heart2">
-      		<div class="circle"></div>
-      	</div>	
-      </div>
-      <div class="col">
-      	<div class="heart heart3">
-      		<div class="circle"></div>
-      	</div>	
-      </div>
-      <div class="col">
-      	<div class="heart heart4">
-      		<div class="circle"></div>
-      	</div>	
-      </div>
-      <div class="col">
-      	<div class="heart heart5">
-      		<div class="circle"></div>
-      	</div>	
-      </div>
-  </div-->
-  </body>
+    class Globo {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.radius = Math.random() * 20 + 10;
+            this.color = this.getRandomPastelColor();
+            this.speed = Math.random() * 2 + 1;
+        }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
-  <scrip src="./src/app.js"></scrip>
+        getRandomPastelColor() {
+            const r = Math.floor(Math.random() * 127 + 127);
+            const g = Math.floor(Math.random() * 127 + 127);
+            const b = Math.floor(Math.random() * 127 + 127);
+            return `rgb(${r},${g},${b})`;
+        }
+
+        update() {
+            this.y -= this.speed;
+            if (this.y + this.radius < 0) {
+                this.y = canvas.height + this.radius;
+                this.x = Math.random() * canvas.width;
+                this.color = this.getRandomPastelColor();
+            }
+        }
+
+        draw() {
+            // Dibujar el globo elíptico
+            ctx.beginPath();
+            ctx.ellipse(this.x, this.y, this.radius, this.radius * 1.3, 0, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+
+    let globos = [];
+    for (let i = 0; i < 50; i++) {
+        globos.push(new Globo());
+    }
+
+    function drawBackground() {
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, 'rgba(255, 183, 197, 1)'); // Rosa pastel
+        gradient.addColorStop(1, 'rgba(204, 229, 255, 1)'); // Azul pastel
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function drawCard() {
+        const cardWidth = 300;
+        const cardHeight = 200;
+        const cardX = (canvas.width - cardWidth) / 2;
+        const cardY = (canvas.height - cardHeight) / 2;
+
+        // Dibujar la tarjeta
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillRect(cardX, cardY, cardWidth, cardHeight);
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.strokeRect(cardX, cardY, cardWidth, cardHeight);
+
+        // Dibujar el texto
+        ctx.fillStyle = '#ff69b4';
+        ctx.font = '30px Pacifico';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Feliz Cumpleaños', cardX + cardWidth / 2, cardY + cardHeight / 2 - 20);
+        ctx.fillText('Paulina', cardX + cardWidth / 2, cardY + cardHeight / 2 + 20);
+    }
+
+    function animate() {
+        drawBackground();
+        globos.forEach(globo => {
+            globo.update();
+            globo.draw();
+        });
+        drawCard();
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
 </body>
-
 </html>
