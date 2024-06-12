@@ -64,9 +64,47 @@
         }
     }
 
+    class Particula {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = -Math.random() * canvas.height; // Iniciar desde arriba
+            this.radius = Math.random() * 2 + 1;
+            this.color = this.getRandomColor();
+            this.speed = Math.random() * 3 + 1;
+        }
+
+        getRandomColor() {
+            const colors = ['#ff69b4', '#87ceeb', '#ffd700', '#ffa500', '#ff1493'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        update() {
+            this.y += this.speed;
+            if (this.y - this.radius > canvas.height) {
+                this.y = -this.radius;
+                this.x = Math.random() * canvas.width;
+                this.color = this.getRandomColor();
+            }
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+
     let globos = [];
+    let particulas = [];
+
     for (let i = 0; i < 50; i++) {
         globos.push(new Globo());
+    }
+
+    for (let i = 0; i < 100; i++) {
+        particulas.push(new Particula());
     }
 
     function drawBackground() {
@@ -102,19 +140,26 @@
 
         // Frase bonita y tierna
         ctx.font = '16px Pacifico';
-        ctx.fillStyle = '#000'; 
+        ctx.fillStyle = '#000';
         ctx.fillText('Que la alegría que has difundido', cardX + cardWidth / 2, cardY + 120);
         ctx.fillText('en el pasado', cardX + cardWidth / 2, cardY + 140);
         ctx.fillText('vuelva a ti en este día.', cardX + cardWidth / 2, cardY + 160);
         ctx.fillText('Te deseo un cumpleaños muy feliz.', cardX + cardWidth / 2, cardY + 180);
-      }
+    }
 
     function animate() {
         drawBackground();
+
+        particulas.forEach(particula => {
+            particula.update();
+            particula.draw();
+        });
+
         globos.forEach(globo => {
             globo.update();
             globo.draw();
         });
+
         drawCard();
         requestAnimationFrame(animate);
     }
