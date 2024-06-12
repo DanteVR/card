@@ -79,7 +79,7 @@
 
     function drawCard() {
         const cardWidth = 300;
-        const cardHeight = 200;
+        const cardHeight = 250;
         const cardX = (canvas.width - cardWidth) / 2;
         const cardY = (canvas.height - cardHeight) / 2;
 
@@ -89,14 +89,25 @@
         ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
         ctx.strokeRect(cardX, cardY, cardWidth, cardHeight);
 
-        // Dibujar el texto
-        ctx.fillStyle = '#ff69b4';
+        // Dibujar el texto de feliz cumpleaños
+        ctx.fillStyle = '#ff69b4'; // Color negro
         ctx.font = '30px Pacifico';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('Felíz Cumpleaños', cardX + cardWidth / 2, cardY + cardHeight / 2 - 20);
-        ctx.fillText('Paulina', cardX + cardWidth / 2, cardY + cardHeight / 2 + 20);
-    }
+        ctx.fillText('¡Felices', cardX + cardWidth / 2, cardY + 40);
+
+        // Dibujar el texto de Paulina
+        ctx.font = '24px Pacifico';
+        ctx.fillText('Dieciocho!', cardX + cardWidth / 2, cardY + 80);
+
+        // Frase bonita y tierna
+        ctx.font = '16px Pacifico';
+        ctx.fillStyle = '#000'; 
+        ctx.fillText('Que la alegría que has difundido', cardX + cardWidth / 2, cardY + 120);
+        ctx.fillText('en el pasado', cardX + cardWidth / 2, cardY + 140);
+        ctx.fillText('vuelva a ti en este día.', cardX + cardWidth / 2, cardY + 160);
+        ctx.fillText('Te deseo un cumpleaños muy feliz.', cardX + cardWidth / 2, cardY + 180);
+      }
 
     function animate() {
         drawBackground();
